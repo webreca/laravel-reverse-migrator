@@ -1,4 +1,4 @@
-## How to Use Laravel Reverse Migrator Application
+## How to Use Laravel Reverse Migrator Application 
 
 #### 1. Clone your project
 ```bash
@@ -121,6 +121,19 @@ Supported database with user-defined types:
 
 - [x] PostgreSQL
 - [x] SQL Server
+
+## Generate Seeder From Database
+
+### [table_name]
+Mandatory parameter which defines which table/s will be used for seed creation.
+Use CSV notation for multiple tables. Seed file will be generated for each table.
+
+Examples:
+```
+php artisan iseed my_table
+```
+```
+php artisan iseed my_table,another_table
 
 ## Thank You
 
