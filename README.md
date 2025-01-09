@@ -1,31 +1,31 @@
 ## How to Use Laravel Reverse Migrator Application
 
-### 1. Clone your project
+#### 1. Clone your project
 ```bash
 git clone https://github.com/webreca/laravel-reverse-migrator.git
 ```
-### 2. Go to the folder application using cd command on your cmd or terminal
+#### 2. Go to the folder application using cd command on your cmd or terminal
 ```bash
-cd /laravel-reverse-migrator
+cd laravel-reverse-migrator
 ```
-### 3. Run composer install on your cmd or terminal
+#### 3. Run composer install on your cmd or terminal
 ```bash
 composer install
 ```
-### 4. Copy .env.example file to .env on the root folder. You can type copy .env.example .env if using command prompt Windows or cp .env.example .env if using terminal, Ubuntu
+#### 4. Copy .env.example file to .env on the root folder. You can type copy .env.example .env if using command prompt Windows or cp .env.example .env if using terminal, Ubuntu
 ```bash
 copy .env.example .env
 ```
-### 5. Open your .env file and change the database name (DB_DATABASE) to whatever you have, username (DB_USERNAME) and password (DB_PASSWORD) field correspond to your configuration.
-### 6. Run php artisan key:generate
+#### 5. Open your .env file and change the database name (DB_DATABASE) to whatever you have, username (DB_USERNAME) and password (DB_PASSWORD) field correspond to your configuration.
+#### 6. Run php artisan key:generate
 ```bash
 php artisan key:generate
 ```
-### 7. Run php artisan migrate
+#### 7. Run php artisan migrate
 ```bash
 php artisan migrate
 ```
-### 8. Run php artisan serve
+#### 8. Run php artisan serve
 ```bash
 php artisan serve
 ```
