@@ -1,3 +1,129 @@
+## How to Use Laravel Reverse Migrator Application
+
+### 1. Clone your project
+```bash
+git clone https://github.com/webreca/laravel-reverse-migrator.git
+```
+### 2. Go to the folder application using cd command on your cmd or terminal
+```bash
+cd /laravel-reverse-migrator
+```
+### 3. Run composer install on your cmd or terminal
+```bash
+composer install
+```
+### 4. Copy .env.example file to .env on the root folder. You can type copy .env.example .env if using command prompt Windows or cp .env.example .env if using terminal, Ubuntu
+```bash
+copy .env.example .env
+```
+### 5. Open your .env file and change the database name (DB_DATABASE) to whatever you have, username (DB_USERNAME) and password (DB_PASSWORD) field correspond to your configuration.
+### 6. Run php artisan key:generate
+```bash
+php artisan key:generate
+```
+### 7. Run php artisan migrate
+```bash
+php artisan migrate
+```
+### 8. Run php artisan serve
+```bash
+php artisan serve
+```
+To create migrations for all the tables, run:
+
+```bash
+php artisan migrate:generate
+```
+
+You can specify the tables you wish to generate using:
+
+```bash
+php artisan migrate:generate --tables="table1,table2,table3,table4,table5"
+```
+
+You can also ignore tables with:
+
+```bash
+php artisan migrate:generate --ignore="table3,table4,table5"
+```
+
+Laravel Migrations Generator will first generate all the tables, columns and indexes, and afterwards setup all the foreign key constraints.
+
+So make sure you include all the tables listed in the foreign keys so that they are present when the foreign keys are created.
+
+You can also specify the connection name if you are not using your default connection with:
+
+```bash
+php artisan migrate:generate --connection="connection_name"
+```
+
+### Squash Migrations
+
+By default, Generator will generate multiple migration files for each table.
+
+You can squash all migrations into a single file with:
+
+```bash
+php artisan migrate:generate --squash
+```
+
+### Options
+
+Run `php artisan help migrate:generate` for a list of options.
+
+| Options                              | Description                                                                                                                                                   |
+|--------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| -c, --connection[=CONNECTION]        | The database connection to use                                                                                                                                |
+| -t, --tables[=TABLES]                | A list of tables or views you wish to generate migrations for separated by a comma: users,posts,comments                                                      |
+| -i, --ignore[=IGNORE]                | A list of tables or views you wish to ignore, separated by a comma: users,posts,comments                                                                      |
+| -p, --path[=PATH]                    | Where should the file be created?                                                                                                                             |
+| -tp, --template-path[=TEMPLATE-PATH] | The location of the template for this generator                                                                                                               |
+| --date[=DATE]                        | Migrations will be created with specified date. Views and foreign keys will be created with + 1 second. Date should be in format supported by `Carbon::parse` |
+| --table-filename[=TABLE-FILENAME]    | Define table migration filename, default pattern: `[datetime]\_create_[name]_table.php`                                                                       |
+| --view-filename[=VIEW-FILENAME]      | Define view migration filename, default pattern: `[datetime]\_create_[name]_view.php`                                                                         |
+| --proc-filename[=PROC-FILENAME]      | Define stored procedure filename, default pattern: `[datetime]\_create_[name]_proc.php`                                                                       |
+| --fk-filename[=FK-FILENAME]          | Define foreign key migration filename, default pattern: `[datetime]\_add_foreign_keys_to_[name]_table.php`                                                    |
+| --log-with-batch[=LOG-WITH-BATCH]    | Log migrations with given batch number. We recommend using batch number 0 so that it becomes the first migration                                              |
+| --default-index-names                | Don\'t use DB index names for migrations                                                                                                                      |
+| --default-fk-names                   | Don\'t use DB foreign key names for migrations                                                                                                                |
+| --use-db-collation                   | Generate migrations with existing DB collation                                                                                                                |
+| --skip-log                           | Don\'t log into migrations table                                                                                                                              |
+| --skip-vendor                        | Don\'t generate vendor migrations                                                                                                                             |
+| --skip-views                         | Don\'t generate views                                                                                                                                         |
+| --skip-proc                          | Don\'t generate stored procedures                                                                                                                             |
+| --squash                             | Generate all migrations into a single file                                                                                                                    |
+| --with-has-table                     | Check for the existence of a table using `hasTable`                                                                                                           |
+
+## SQLite Alter Foreign Key
+
+The generator first generates all tables and then adds foreign keys to existing tables.
+
+However, SQLite only supports foreign keys upon creation of the table and not when tables are altered.
+*_add_foreign_keys_* migrations will still be generated, however will get omitted if migrate to SQLite type database.
+
+## User-Defined Type Columns
+
+The generator will recognize user-defined type from the schema, and then generate migration as
+
+```php
+public function up()
+{
+    Schema::create('table', function (Blueprint $table) {
+        ...
+    });
+    DB::statement("ALTER TABLE table ADD column custom_type NOT NULL");
+}
+```
+
+Note that the new `column` is always added at the end of the created `table` which means the ordering of the column generated in migration will differ from what we have from the schema.
+
+Supported database with user-defined types:
+
+- [x] PostgreSQL
+- [x] SQL Server
+
+## Thank You
+
 [WEBRECA TECHNOLOGIES](https://www.webreca.com/) <img src="https://github.com/TheDudeThatCode/TheDudeThatCode/blob/master/Assets/wave.gif" width="29px">
 <br />
 <br />
