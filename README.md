@@ -134,7 +134,7 @@ php artisan iseed my_table
 ```
 ```
 php artisan iseed my_table,another_table
-
+```
 ## Thank You
 
 [WEBRECA TECHNOLOGIES](https://www.webreca.com/) <img src="https://github.com/TheDudeThatCode/TheDudeThatCode/blob/master/Assets/wave.gif" width="29px">
